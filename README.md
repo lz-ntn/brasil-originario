@@ -30,10 +30,15 @@ brasil-originario/
 ├── dossie.html
 ├── povos-linguas.html
 ├── mitos.html
+├── esperanca.html
 ├── fontes.html
+├── robots.txt
+├── sitemap.xml
+├── vercel.json          # cabeçalhos de segurança e cache
 └── assets/
     ├── css/estilo.css
-    └── js/principal.js
+    ├── js/principal.js
+    └── img/og.png       # cartão Open Graph 1200×630
 ```
 
 ## Rodar localmente
@@ -49,9 +54,30 @@ python3 -m http.server 5500
 
 ## Publicar
 
-Qualquer hospedagem de arquivos estáticos: Vercel, GitHub Pages, Netlify,
-Cloudflare Pages. Basta apontar para a raiz do repositório. Não há variáveis de
-ambiente, backend ou banco de dados.
+Em produção na Vercel: **https://brasil-originario.vercel.app/**
+
+O projeto Vercel está ligado a este repositório (`lz-ntn/brasil-originario`), então
+**todo `git push` na `main` republica sozinho** — não é preciso rodar nada. O
+`vercel.json` é lido a cada deploy e aplica:
+
+- **Cabeçalhos de segurança:** `Content-Security-Policy` restritivo (o único script
+  inline é o que liga a classe `js`, autorizado por hash SHA-256), `X-Frame-Options:
+  DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy` e `Permissions-Policy`.
+  Ao mudar o script inline, **recalcule o hash**:
+  `printf '%s' '<conteúdo>' | openssl dgst -sha256 -binary | openssl base64`.
+- **Cache:** `/assets/*` com `max-age=31536000, immutable`; HTML sempre revalidado
+  (`must-revalidate`), para que uma correção apareça no próximo acesso.
+
+Qualquer outro host estático (GitHub Pages, Netlify, Cloudflare Pages) também
+funciona: basta apontar para a raiz. Não há variáveis de ambiente, backend ou banco.
+
+## SEO
+
+- `robots.txt` libera a indexação e aponta para o `sitemap.xml`.
+- `sitemap.xml` lista as sete páginas com `lastmod`.
+- Cada página tem `canonical`, `robots`, Open Graph e Twitter Card próprios, além de
+  **JSON-LD** (`WebSite` na home, `WebPage` nas demais).
+- Imagem de compartilhamento: `assets/img/og.png` (1200×630).
 
 ## Princípios editoriais
 
