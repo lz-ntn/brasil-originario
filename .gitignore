@@ -1,0 +1,20 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Temporários
+*.log
+*.tmp
+.cache/
+
+# Ambientes (não há backend, mas por precaução)
+.env
+.env.*
+!.env.example
