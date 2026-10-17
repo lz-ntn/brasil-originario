@@ -37,7 +37,8 @@ brasil-originario/
 ├── vercel.json          # cabeçalhos de segurança e cache
 └── assets/
     ├── css/estilo.css
-    ├── js/principal.js
+    ├── js/cabeca.js     # classe js + shims window.va/window.si (sem inline)
+    ├── js/principal.js  # interações
     └── img/og.png       # cartão Open Graph 1200×630
 ```
 
@@ -60,13 +61,24 @@ O projeto Vercel está ligado a este repositório (`lz-ntn/brasil-originario`), 
 **todo `git push` na `main` republica sozinho** — não é preciso rodar nada. O
 `vercel.json` é lido a cada deploy e aplica:
 
-- **Cabeçalhos de segurança:** `Content-Security-Policy` restritivo (o único script
-  inline é o que liga a classe `js`, autorizado por hash SHA-256), `X-Frame-Options:
-  DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy` e `Permissions-Policy`.
-  Ao mudar o script inline, **recalcule o hash**:
-  `printf '%s' '<conteúdo>' | openssl dgst -sha256 -binary | openssl base64`.
-- **Cache:** `/assets/*` com `max-age=31536000, immutable`; HTML sempre revalidado
-  (`must-revalidate`), para que uma correção apareça no próximo acesso.
+- **Cabeçalhos de segurança:** `Content-Security-Policy` com `script-src 'self'` —
+  **o site não tem nenhum script inline** (a classe `js` e os shims de analytics ficam
+  em `assets/js/cabeca.js`), então não há hash de CSP para manter. Também
+  `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`,
+  `Permissions-Policy` e `connect-src` liberando `https://vitals.vercel-insights.com`
+  (necessário ao Speed Insights).
+- **Cache:** CSS/JS revalidados por ETag (`max-age=0, must-revalidate`) e imagens por
+  1 dia. De propósito **sem `immutable`**: os arquivos não têm hash no nome, e
+  `immutable` deixaria uma correção presa por até um ano no navegador de quem já
+  visitou.
+
+## Analytics
+
+Web Analytics e Speed Insights da Vercel estão declarados (`/_vercel/insights/script.js`
+e `/_vercel/speed-insights/script.js`). Para funcionarem, é preciso **habilitar cada um
+no painel da Vercel** (projeto → *Analytics* / *Speed Insights* → **Enable**) e aguardar
+o próximo deploy — sem isso esses caminhos não existem e retornam 404. O shim
+`window.va`/`window.si` fica em `assets/js/cabeca.js` (nunca inline, para não quebrar o CSP).
 
 Qualquer outro host estático (GitHub Pages, Netlify, Cloudflare Pages) também
 funciona: basta apontar para a raiz. Não há variáveis de ambiente, backend ou banco.
