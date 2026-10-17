@@ -65,7 +65,7 @@ O projeto Vercel está ligado a este repositório (`lz-ntn/brasil-originario`), 
   **o site não tem nenhum script inline** (a classe `js` e os shims de analytics ficam
   em `assets/js/cabeca.js`), então não há hash de CSP para manter. Também
   `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`,
-  `Permissions-Policy` e `connect-src` liberando `https://vitals.vercel-insights.com`
+  `Permissions-Policy` e `connect-src` liberando `https://*.vercel-insights.com`
   (necessário ao Speed Insights).
 - **Cache:** CSS/JS revalidados por ETag (`max-age=0, must-revalidate`) e imagens por
   1 dia. De propósito **sem `immutable`**: os arquivos não têm hash no nome, e
@@ -74,10 +74,11 @@ O projeto Vercel está ligado a este repositório (`lz-ntn/brasil-originario`), 
 
 ## Analytics
 
-Web Analytics e Speed Insights da Vercel estão declarados (`/_vercel/insights/script.js`
-e `/_vercel/speed-insights/script.js`). Para funcionarem, é preciso **habilitar cada um
-no painel da Vercel** (projeto → *Analytics* / *Speed Insights* → **Enable**) e aguardar
-o próximo deploy — sem isso esses caminhos não existem e retornam 404. O shim
+Web Analytics e Speed Insights da Vercel estão ativos: as páginas carregam
+`/_vercel/insights/script.js` e `/_vercel/speed-insights/script.js` (ambos respondem
+`200 application/javascript`). Eles só existem porque foram **habilitados no painel da
+Vercel** (projeto → *Analytics* / *Speed Insights* → **Enable**); se forem desabilitados,
+esses caminhos passam a dar 404 e o console acusa recurso faltante. O shim
 `window.va`/`window.si` fica em `assets/js/cabeca.js` (nunca inline, para não quebrar o CSP).
 
 Qualquer outro host estático (GitHub Pages, Netlify, Cloudflare Pages) também
