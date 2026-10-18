@@ -928,6 +928,85 @@ footer a {
   color: var(--cor-texto-fraco);
 }
 
+/* ------------------------------ Imagens --------------------------------- */
+.pagina-cabecalho {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3rem, 2.2rem + 5vw, 5.2rem);
+  border-bottom: var(--borda-sutil);
+}
+.pagina-cabecalho::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background-image: url("../img/ilustracao-ia-povos.webp");
+  background-size: cover;
+  background-position: center 32%;
+  filter: blur(8px) brightness(0.36) saturate(0.85);
+  transform: scale(1.06);
+}
+.pagina-cabecalho::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 11, 9, 0.55),
+    rgba(13, 11, 9, 0.88)
+  );
+}
+.pagina-cabecalho > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.figura {
+  margin: 2.2rem auto 0;
+  max-width: 34rem;
+  border: var(--borda-sutil);
+  border-radius: var(--raio);
+  overflow: hidden;
+  background: var(--cor-superficie);
+}
+.figura.larga {
+  max-width: 52rem;
+}
+.figura.retrato {
+  max-width: 22rem;
+}
+.figura.estreita {
+  max-width: 18rem;
+}
+.figura picture,
+.figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.figura figcaption {
+  padding: 0.85rem 1.1rem;
+  border-top: var(--borda-sutil);
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--cor-texto-suave);
+}
+.figura figcaption .fonte {
+  display: block;
+  margin-top: 0.3rem;
+}
+.figura .selo-ia {
+  display: inline-block;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--cor-fundo);
+  background: var(--anata);
+  padding: 0.18rem 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
 /* ------------------------------ Utilitários ----------------------------- */
 .sr-only {
   position: absolute;

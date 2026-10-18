@@ -39,8 +39,14 @@ brasil-originario/
     ├── css/estilo.css
     ├── js/cabeca.js     # classe js + shims window.va/window.si (sem inline)
     ├── js/principal.js  # interações
-    └── img/og.png       # cartão Open Graph 1200×630
+    └── img/
+        ├── og.png              # cartão Open Graph 1200×630
+        ├── ilustracao-ia-povos  # hero + fundo do cabeçalho (ilustração de IA)
+        ├── grafismos-boggiani    # foto histórica (domínio público)
+        └── mulher-bandeira       # foto (domínio público)
 ```
+
+As fotos existem em `.webp` (padrão) e `.jpg` (fallback), servidas por `<picture>`.
 
 ## Rodar localmente
 
@@ -91,6 +97,25 @@ funciona: basta apontar para a raiz. Não há variáveis de ambiente, backend ou
 - Cada página tem `canonical`, `robots`, Open Graph e Twitter Card próprios, além de
   **JSON-LD** (`WebSite` na home, `WebPage` nas demais).
 - Imagem de compartilhamento: `assets/img/og.png` (1200×630).
+
+## Imagens e créditos
+
+As imagens aparecem em três lugares: como **banner de abertura** (`index.html`), como
+**ilustração de seção** (`povos-linguas.html`, `esperanca.html`) e como **faixa de
+cabeçalho** das páginas internas (classe `.pagina-cabecalho`, que usa a ilustração de IA
+como fundo desfocado). Toda figura é um `<figure>` com `<figcaption>` e crédito, `<picture>`
+com WebP + JPEG, `width`/`height` (evita salto de layout) e `loading="lazy"` fora da
+dobra.
+
+- `ilustracao-ia-povos` — **ilustração gerada por IA**, marcada com o selo "Ilustração
+  gerada por IA". **Não é registro histórico** e nenhuma cena representa fato, pessoa ou
+  povo real; é a única imagem do site com esse aviso, e ele nunca deve ser removido
+  enquanto a imagem for usada.
+- `grafismos-boggiani` — fotografia de Guido Boggiani (1861–1902), **domínio público**.
+- `mulher-bandeira` — fotografia em **domínio público** (confirmar a origem exata antes de
+  reaproveitar fora deste projeto).
+
+Ao trocar uma imagem, mantenha o crédito e a licença na legenda e atualize o `alt`.
 
 ## Princípios editoriais
 

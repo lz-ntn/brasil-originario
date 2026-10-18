@@ -53,6 +53,17 @@ Contexto mais amplo do ecossistema (`~/vidaReal`): `~/vidaReal/AGENTS.md`. Ele p
   bloco de outra e ajuste título/descrição/URL — **e adicione a URL ao `sitemap.xml`**.
 - Imagem social única: `assets/img/og.png` (1200×630).
 
+## Imagens
+
+- Sempre `<picture>` com WebP + JPEG, `width`/`height` (evita salto de layout) e
+  `loading="lazy"` **fora da dobra**; legenda em `<figure>`/`<figcaption>` com **crédito e
+  licença**.
+- `ilustracao-ia-povos` é **gerada por IA** e leva o selo "Ilustração gerada por IA" —
+  nunca remova o aviso nem a apresente como registro histórico.
+- Faixa de cabeçalho das páginas internas = classe `.pagina-cabecalho` (fundo desfocado).
+  Não duplique CSS de cabeçalho por página.
+- Nome de arquivo nunca com parênteses, acento ou maiúscula (quebra URL) — use slug.
+
 ## Conteúdo — regra de ouro
 
 - **Todo número, data e afirmação cita a fonte** (IBGE, Funai, CNV, Cimi, ONU, ISA,
