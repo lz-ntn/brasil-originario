@@ -40,13 +40,13 @@ brasil-originario/
     ├── js/cabeca.js     # classe js + shims window.va/window.si (sem inline)
     ├── js/principal.js  # interações
     └── img/
-        ├── og.png              # cartão Open Graph 1200×630
-        ├── ilustracao-ia-povos  # hero + fundo do cabeçalho (ilustração de IA)
-        ├── grafismos-boggiani    # foto histórica (domínio público)
-        └── mulher-bandeira       # foto (domínio público)
+        ├── og.png                     # cartão Open Graph 1200×630
+        ├── <slug>.webp / .jpg         # ilustrações de IA (selo "gerada por IA")
+        ├── <slug>-640.webp            # variante leve para fundos de cabeçalho
+        └── grafismos-boggiani, mulher-bandeira   # fotos em domínio público
 ```
 
-As fotos existem em `.webp` (padrão) e `.jpg` (fallback), servidas por `<picture>`.
+Cada imagem existe em `.webp` (padrão) e `.jpg` (fallback), servidas por `<picture>`.
 
 ## Rodar localmente
 
@@ -100,22 +100,31 @@ funciona: basta apontar para a raiz. Não há variáveis de ambiente, backend ou
 
 ## Imagens e créditos
 
-As imagens aparecem em três lugares: como **banner de abertura** (`index.html`), como
-**ilustração de seção** (`povos-linguas.html`, `esperanca.html`) e como **faixa de
-cabeçalho** das páginas internas (classe `.pagina-cabecalho`, que usa a ilustração de IA
-como fundo desfocado). Toda figura é um `<figure>` com `<figcaption>` e crédito, `<picture>`
-com WebP + JPEG, `width`/`height` (evita salto de layout) e `loading="lazy"` fora da
-dobra.
+Há duas famílias, e a diferença entre elas é obrigatória:
 
-- `ilustracao-ia-povos` — **ilustração gerada por IA**, marcada com o selo "Ilustração
-  gerada por IA". **Não é registro histórico** e nenhuma cena representa fato, pessoa ou
-  povo real; é a única imagem do site com esse aviso, e ele nunca deve ser removido
-  enquanto a imagem for usada.
+**Reais — registro/documento, com crédito e licença na legenda:**
 - `grafismos-boggiani` — fotografia de Guido Boggiani (1861–1902), **domínio público**.
 - `mulher-bandeira` — fotografia em **domínio público** (confirmar a origem exata antes de
   reaproveitar fora deste projeto).
 
-Ao trocar uma imagem, mantenha o crédito e a licença na legenda e atualize o `alt`.
+**Ilustrações geradas por IA — sempre com o selo "Ilustração gerada por IA":**
+`ilustracao-ia-povos` (colagem), `dialogo-reconciliacao`, `floresta-renasce`,
+`heranca-ancestral`, `orgulho-identidade`, `valeu-entao`. **Não são registro histórico** e
+nenhuma representa fato, pessoa ou povo real. O selo nunca deve ser removido enquanto a
+imagem for usada.
+
+Onde aparecem:
+- **Banner de abertura** — `index.html` (colagem de IA) e `esperanca.html` (retrato de IA).
+- **Ilustração de seção** — `esperanca.html` (quatro figuras de IA) e `povos-linguas.html`
+  (duas fotos reais).
+- **Faixa de cabeçalho** — cada página interna escolhe a sua com
+  `--cabecalho-img` no próprio `<section class="pagina-cabecalho">`; o fundo é desfocado,
+  então usa a variante `-640.webp` (leve).
+
+Toda figura é um `<figure>`/`<figcaption>` com crédito, `<picture>` com WebP + JPEG,
+`srcset`/`sizes` (640w + tamanho cheio), `width`/`height` (evita salto de layout) e
+`loading="lazy"` fora da dobra. Ao trocar uma imagem, mantenha crédito, licença, `alt` — e o
+selo de IA, quando for o caso.
 
 ## Princípios editoriais
 

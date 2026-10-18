@@ -55,13 +55,17 @@ Contexto mais amplo do ecossistema (`~/vidaReal`): `~/vidaReal/AGENTS.md`. Ele p
 
 ## Imagens
 
-- Sempre `<picture>` com WebP + JPEG, `width`/`height` (evita salto de layout) e
-  `loading="lazy"` **fora da dobra**; legenda em `<figure>`/`<figcaption>` com **crédito e
-  licença**.
-- `ilustracao-ia-povos` é **gerada por IA** e leva o selo "Ilustração gerada por IA" —
-  nunca remova o aviso nem a apresente como registro histórico.
-- Faixa de cabeçalho das páginas internas = classe `.pagina-cabecalho` (fundo desfocado).
-  Não duplique CSS de cabeçalho por página.
+- Sempre `<picture>` com WebP + JPEG, `srcset`/`sizes` (640w + tamanho cheio),
+  `width`/`height` (evita salto de layout) e `loading="lazy"` **fora da dobra**; legenda em
+  `<figure>`/`<figcaption>` com **crédito e licença**.
+- **Toda imagem gerada por IA leva o selo "Ilustração gerada por IA"** e nunca é
+  apresentada como registro histórico: `ilustracao-ia-povos`, `dialogo-reconciliacao`,
+  `floresta-renasce`, `heranca-ancestral`, `orgulho-identidade`, `valeu-entao`. Só
+  `grafismos-boggiani` e `mulher-bandeira` são fotos reais (domínio público).
+- Faixa de cabeçalho: cada página interna escolhe a sua imagem com
+  `style="--cabecalho-img:url('assets/img/<slug>-640.webp')"` no próprio
+  `<section class="pagina-cabecalho">` (o fundo é desfocado, então use sempre a variante
+  `-640.webp`). Não duplique CSS de cabeçalho por página.
 - Nome de arquivo nunca com parênteses, acento ou maiúscula (quebra URL) — use slug.
 
 ## Conteúdo — regra de ouro
